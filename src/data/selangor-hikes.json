@@ -1,0 +1,262 @@
+[
+  {
+    "id": "broga-hill",
+    "name": "Broga Hill",
+    "district": "Semenyih",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 2.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Broga+Hill+Semenyih",
+    "rarity": "common",
+    "blurb": "Sunrise favourite with grassy ridges and Semenyih skyline views. Short but steep near the top."
+  },
+  {
+    "id": "bukit-gasing",
+    "name": "Bukit Gasing",
+    "district": "Petaling Jaya",
+    "difficulty": "Moderate",
+    "distanceKm": 4.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Gasing+Forest+Reserve",
+    "rarity": "common",
+    "blurb": "Classic PJ jungle loop with rope climbs, stream crossings, and the famous suspension bridge."
+  },
+  {
+    "id": "bukit-tabur",
+    "name": "Bukit Tabur (West)",
+    "district": "Gombak",
+    "difficulty": "Hard",
+    "distanceKm": 3.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Tabur+West",
+    "rarity": "rare",
+    "blurb": "Knife-edge quartz ridge above Klang Gates Dam. Permit required; exposure and scramble sections."
+  },
+  {
+    "id": "templer-park",
+    "name": "Templer Park",
+    "district": "Rawang",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 5.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Templer+Park+Rawang",
+    "rarity": "common",
+    "blurb": "Waterfalls, picnic spots, and longer ridge options under shady canopy near Rawang."
+  },
+  {
+    "id": "frim-kepong",
+    "name": "FRIM Kepong",
+    "district": "Kepong",
+    "difficulty": "Easy",
+    "distanceKm": 3.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=FRIM+Kepong+Canopy+Walk",
+    "rarity": "common",
+    "blurb": "Research forest with canopy walk, Rover Track, and family-friendly trails. Entry fee applies."
+  },
+  {
+    "id": "bukit-kiara",
+    "name": "Bukit Kiara",
+    "district": "Kuala Lumpur / PJ",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 6.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Kiara+Park",
+    "rarity": "common",
+    "blurb": "Urban green lung with MTB trails, jogging loops, and quick after-work hill climbs."
+  },
+  {
+    "id": "kota-damansara-cf",
+    "name": "Kota Damansara Community Forest",
+    "district": "Petaling",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 4.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kota+Damansara+Community+Forest",
+    "rarity": "uncommon",
+    "blurb": "Volunteer-restored secondary forest with marked loops and weekend community energy."
+  },
+  {
+    "id": "ampang-recreational",
+    "name": "Ampang Forest Recreational Park",
+    "district": "Ampang",
+    "difficulty": "Easy",
+    "distanceKm": 2.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ampang+Forest+Recreational+Park",
+    "rarity": "common",
+    "blurb": "Cool stream pools and short jungle paths at the edge of Ampang town."
+  },
+  {
+    "id": "gunung-nuang",
+    "name": "Gunung Nuang",
+    "district": "Hulu Langat",
+    "difficulty": "Hard",
+    "distanceKm": 16.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gunung+Nuang+Pangsun",
+    "rarity": "legendary",
+    "blurb": "Selangor's high point (~1,493 m). Long day hike via Pangsun with river crossings and campsite options."
+  },
+  {
+    "id": "kanching-falls",
+    "name": "Kanching Rainforest Waterfall",
+    "district": "Rawang",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 2.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kanching+Rainforest+Waterfall",
+    "rarity": "uncommon",
+    "blurb": "Multi-tier falls with steep steps. Popular weekends — go early for quieter pools."
+  },
+  {
+    "id": "bukit-lagong",
+    "name": "Bukit Lagong",
+    "district": "Gombak",
+    "difficulty": "Moderate–Hard",
+    "distanceKm": 8.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Lagong+Forest+Reserve",
+    "rarity": "rare",
+    "blurb": "Forest reserve ridges west of FRIM. Less crowded than Tabur; expect mud after rain."
+  },
+  {
+    "id": "bukit-botak",
+    "name": "Bukit Botak",
+    "district": "Kajang",
+    "difficulty": "Moderate",
+    "distanceKm": 3.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Botak+Kajang",
+    "rarity": "uncommon",
+    "blurb": "Bare summit rock with Kajang city views. Short approach, slippery when wet."
+  },
+  {
+    "id": "ayer-hitam",
+    "name": "Ayer Hitam Forest Reserve",
+    "district": "Puchong",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 5.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ayer+Hitam+Forest+Reserve+Puchong",
+    "rarity": "uncommon",
+    "blurb": "Urban fringe research forest popular with runners and birders near Puchong."
+  },
+  {
+    "id": "sungai-congkak",
+    "name": "Sungai Congkak",
+    "district": "Hulu Langat",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 4.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sungai+Congkak+Recreational+Forest",
+    "rarity": "common",
+    "blurb": "River trail and recreational forest — picnic, swim holes, and gentle upstream walks."
+  },
+  {
+    "id": "saga-hill",
+    "name": "Saga Hill",
+    "district": "Cheras",
+    "difficulty": "Moderate",
+    "distanceKm": 3.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Saga+Hill+Cheras",
+    "rarity": "uncommon",
+    "blurb": "Cheras ridge hike with rope sections and city glimpses. Watch for after-rain clay."
+  },
+  {
+    "id": "bukit-cerakah",
+    "name": "Bukit Cerakah / Shah Alam Forest",
+    "district": "Shah Alam",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 6.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Cerakah+Shah+Alam",
+    "rarity": "common",
+    "blurb": "Eco park trails through secondary forest near the Shah Alam botanical gardens."
+  },
+  {
+    "id": "bukit-dinding",
+    "name": "Bukit Dinding",
+    "district": "Wangsa Maju",
+    "difficulty": "Moderate",
+    "distanceKm": 4.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Dinding+Wangsa+Maju",
+    "rarity": "uncommon",
+    "blurb": "Steep concrete / dirt climb to telecom towers with wide KL northeast views."
+  },
+  {
+    "id": "kemensah",
+    "name": "Kemensah Heights Trails",
+    "district": "Ulu Klang",
+    "difficulty": "Moderate–Hard",
+    "distanceKm": 7.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kemensah+Heights+trail",
+    "rarity": "rare",
+    "blurb": "Network of forest trails above Ulu Klang — muddy, rooty, and rewarding when quiet."
+  },
+  {
+    "id": "bukit-sungai-puteh",
+    "name": "Bukit Sungai Puteh",
+    "district": "Cheras",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 2.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Sungai+Puteh",
+    "rarity": "common",
+    "blurb": "Compact Cheras hill with a small summit clearing — good weekday cardio option."
+  },
+  {
+    "id": "kenny-hills",
+    "name": "Kenny Hills / Bukit Tunku",
+    "district": "Kuala Lumpur",
+    "difficulty": "Easy",
+    "distanceKm": 5.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Tunku+Kenny+Hills",
+    "rarity": "common",
+    "blurb": "Leafy residential loops and short forest connectors near KL's colonial hill suburb."
+  },
+  {
+    "id": "gombak-river",
+    "name": "Gombak River Trail",
+    "district": "Gombak",
+    "difficulty": "Easy–Moderate",
+    "distanceKm": 3.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gombak+River+trail+Selangor",
+    "rarity": "uncommon",
+    "blurb": "Riverside path into the foothills — cool microclimate and weekend picnic crowds."
+  },
+  {
+    "id": "bukit-takun",
+    "name": "Bukit Takun",
+    "district": "Gombak",
+    "difficulty": "Hard",
+    "distanceKm": 2.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Takun+Gombak",
+    "rarity": "epic",
+    "blurb": "Technical limestone scramble near Templer. Climbing experience recommended; not a casual stroll."
+  },
+  {
+    "id": "semenyih-eco",
+    "name": "Semenyih Eco Community Trails",
+    "district": "Semenyih",
+    "difficulty": "Easy",
+    "distanceKm": 3.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Semenyih+Eco+Venture+trails",
+    "rarity": "common",
+    "blurb": "Gentle estate and fringe-forest walks near Broga — pair with a Broga sunrise."
+  },
+  {
+    "id": "ulu-langat-dam",
+    "name": "Ulu Langat Dam Viewpoint Trail",
+    "district": "Hulu Langat",
+    "difficulty": "Moderate",
+    "distanceKm": 5.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ulu+Langat+Dam+trail",
+    "rarity": "rare",
+    "blurb": "Forest approach toward the dam catchment with quieter midweek vibes."
+  },
+  {
+    "id": "kuala-selangor-nature",
+    "name": "Kuala Selangor Nature Park Trails",
+    "district": "Kuala Selangor",
+    "difficulty": "Easy",
+    "distanceKm": 3.0,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kuala+Selangor+Nature+Park",
+    "rarity": "uncommon",
+    "blurb": "Mangrove boardwalks and birdwatching loops; combine with Bukit Melawati for a full day."
+  },
+  {
+    "id": "bukit-melawati",
+    "name": "Bukit Melawati",
+    "district": "Kuala Selangor",
+    "difficulty": "Easy",
+    "distanceKm": 1.5,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Melawati+Kuala+Selangor",
+    "rarity": "common",
+    "blurb": "Historic hill fort with silvered leaf monkeys and sunset over the Selangor estuary."
+  }
+]
