@@ -1,12 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { User } from 'firebase/auth';
 import type { HikeCard, UserDoc } from '../types';
 import { HikeCardView } from '../components/HikeCard';
+import {
+  DrawRevealStage,
+  type CardPhase,
+} from '../components/DrawRevealStage';
 import { klToday } from '../lib/klDate';
 import { drawForDate } from '../lib/draw';
-
-/** Stagger between each dealt card (ms). */
-const DEAL_STAGGER_MS = 320;
 
 interface Props {
   catalog: HikeCard[];
@@ -17,6 +18,17 @@ interface Props {
   firebaseConfigured: boolean;
   onSelectCard: (card: HikeCard) => void;
 }
+
+type Mode =
+  | { kind: 'idle' }
+  | {
+      kind: 'ritual';
+      ids: string[];
+      currentIndex: number;
+      revealedCount: number;
+      phase: CardPhase;
+    }
+  | { kind: 'done'; ids: string[] };
 
 export function Home({
   catalog,
@@ -30,41 +42,58 @@ export function Home({
   const today = klToday();
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const [previewIds, setPreviewIds] = useState<string[] | null>(null);
-  /** Bumps on each draw/preview so the deal animation re-runs even if ids match. */
-  const [dealSeq, setDealSeq] = useState(0);
+  const [mode, setMode] = useState<Mode>({ kind: 'idle' });
 
   const savedIds =
     userData?.lastDrawDate === today ? userData.lastDrawIds : null;
+  const alreadyDrawn = Boolean(savedIds?.length);
 
-  const displayIds = savedIds ?? previewIds;
+  // Persist saved draw into "done" display (skip ritual by default)
+  const displayFromSaved =
+    alreadyDrawn && mode.kind === 'idle' ? savedIds : null;
 
-  const cards = useMemo(() => {
-    if (!displayIds) return [];
-    return displayIds
+  const doneIds =
+    mode.kind === 'done'
+      ? mode.ids
+      : displayFromSaved;
+
+  const ritualCards = useMemo(() => {
+    if (mode.kind !== 'ritual') return [];
+    return mode.ids
       .map((id) => catalog.find((c) => c.id === id))
       .filter((c): c is HikeCard => Boolean(c));
-  }, [catalog, displayIds]);
+  }, [catalog, mode]);
+
+  const doneCards = useMemo(() => {
+    if (!doneIds) return [];
+    return doneIds
+      .map((id) => catalog.find((c) => c.id === id))
+      .filter((c): c is HikeCard => Boolean(c));
+  }, [catalog, doneIds]);
 
   const owned = new Set(userData?.ownedCardIds ?? []);
 
-  /** Remount key: draw ids + seq so guest re-preview and new draws replay the deal. */
-  const drawKey = displayIds ? `${displayIds.join(',')}:${dealSeq}` : '';
+  function startRitual(ids: string[]) {
+    setMode({
+      kind: 'ritual',
+      ids,
+      currentIndex: 0,
+      revealedCount: 0,
+      phase: 'back',
+    });
+  }
 
   async function handleDraw() {
     setErr(null);
     if (!user) {
-      // Guest preview: show deterministic draw but do not save
       const guest = drawForDate(catalog, today, 3).map((c) => c.id);
-      setDealSeq((n) => n + 1);
-      setPreviewIds(guest);
+      startRitual(guest);
       return;
     }
     setBusy(true);
     try {
       const ids = await onDraw();
-      setDealSeq((n) => n + 1);
-      setPreviewIds(ids);
+      startRitual(ids);
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : 'Draw failed');
     } finally {
@@ -72,7 +101,38 @@ export function Home({
     }
   }
 
-  const alreadyDrawn = Boolean(savedIds?.length);
+  function handleReplay() {
+    const ids = savedIds ?? (mode.kind === 'done' ? mode.ids : null);
+    if (!ids?.length) return;
+    startRitual(ids);
+  }
+
+  const onPhaseChange = useCallback((phase: CardPhase) => {
+    setMode((m) => (m.kind === 'ritual' ? { ...m, phase } : m));
+  }, []);
+
+  const onNext = useCallback(() => {
+    setMode((m) => {
+      if (m.kind !== 'ritual') return m;
+      const nextIndex = m.currentIndex + 1;
+      return {
+        ...m,
+        currentIndex: nextIndex,
+        revealedCount: m.currentIndex + 1,
+        phase: 'back',
+      };
+    });
+  }, []);
+
+  const onRitualComplete = useCallback(() => {
+    setMode((m) => {
+      if (m.kind !== 'ritual') return m;
+      return { kind: 'done', ids: m.ids };
+    });
+  }, []);
+
+  const inRitual = mode.kind === 'ritual';
+  const showStaticRow = !inRitual && doneCards.length > 0;
 
   return (
     <section className="hs-page">
@@ -101,53 +161,76 @@ export function Home({
         </div>
       )}
 
-      <div className="hs-actions">
-        <button
-          type="button"
-          className="hs-btn hs-btn--primary"
-          onClick={handleDraw}
-          disabled={busy || (user ? alreadyDrawn : false)}
-        >
-          {busy
-            ? 'Drawing…'
-            : alreadyDrawn
-              ? 'Drawn for today'
-              : user
-                ? 'Draw today\'s 3 cards'
-                : 'Preview today\'s draw'}
-        </button>
-        {alreadyDrawn && (
-          <span className="hs-muted">Saved · reopen anytime today for the same set</span>
-        )}
-        {!user && displayIds && (
-          <span className="hs-muted">Preview only — sign in to collect</span>
-        )}
-      </div>
+      {!inRitual && (
+        <div className="hs-actions">
+          <button
+            type="button"
+            className="hs-btn hs-btn--primary"
+            onClick={handleDraw}
+            disabled={busy || (user ? alreadyDrawn : false)}
+          >
+            {busy
+              ? 'Drawing…'
+              : alreadyDrawn
+                ? 'Drawn for today'
+                : user
+                  ? "Draw today's 3 cards"
+                  : "Preview today's draw"}
+          </button>
+          {alreadyDrawn && (
+            <span className="hs-muted">
+              Saved · reopen anytime today for the same set
+            </span>
+          )}
+          {!user && doneCards.length > 0 && (
+            <span className="hs-muted">Preview only — sign in to collect</span>
+          )}
+          {(alreadyDrawn || mode.kind === 'done') && doneCards.length > 0 && (
+            <button
+              type="button"
+              className="hs-btn hs-btn--ghost"
+              onClick={handleReplay}
+            >
+              Replay reveal
+            </button>
+          )}
+        </div>
+      )}
 
       {err && <p className="hs-error">{err}</p>}
 
-      {cards.length > 0 ? (
-        <div className="hs-card-row" key={drawKey}>
-          {cards.map((c, index) => (
-            <div
-              key={c.id}
-              className="hs-card-wrap hs-card-wrap--deal"
-              style={{ animationDelay: `${index * DEAL_STAGGER_MS}ms` }}
-            >
+      {inRitual && ritualCards.length > 0 && (
+        <DrawRevealStage
+          cards={ritualCards}
+          ownedIds={owned}
+          currentIndex={mode.currentIndex}
+          revealedCount={mode.revealedCount}
+          phase={mode.phase}
+          onPhaseChange={onPhaseChange}
+          onNext={onNext}
+          onSelectCard={onSelectCard}
+          onRitualComplete={onRitualComplete}
+        />
+      )}
+
+      {showStaticRow ? (
+        <div className="hs-card-row">
+          {doneCards.map((c) => (
+            <div key={c.id} className="hs-card-wrap">
               <HikeCardView
                 card={c}
                 owned={owned.has(c.id)}
-                deal
-                dealIndex={index}
                 onSelect={() => onSelectCard(c)}
               />
             </div>
           ))}
         </div>
       ) : (
-        <p className="hs-muted hs-empty">
-          No cards yet — hit the draw button to reveal today&apos;s trio.
-        </p>
+        !inRitual && (
+          <p className="hs-muted hs-empty">
+            No cards yet — hit the draw button to reveal today&apos;s trio.
+          </p>
+        )
       )}
     </section>
   );

@@ -367,3 +367,193 @@
     will-change: auto;
   }
 }
+
+/* —— Interactive draw ritual (one-by-one) —— */
+.hs-ritual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0 28px;
+  padding: 20px 16px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(125, 211, 160, 0.2);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.hs-ritual__progress {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #7dd3a0;
+  opacity: 0.9;
+}
+
+.hs-ritual__stage {
+  perspective: 1200px;
+  padding: 8px 0;
+}
+
+.hs-ritual__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  text-align: center;
+}
+
+.hs-ritual__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid rgba(125, 211, 160, 0.12);
+  perspective: 800px;
+}
+
+/* —— 3D flip (backfold → front) —— */
+.hs-flip {
+  width: 240px;
+  aspect-ratio: 2.5 / 3.5;
+  perspective: 1200px;
+}
+
+.hs-flip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.56s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hs-flip.is-flipped .hs-flip__inner {
+  transform: rotateY(180deg);
+}
+
+.hs-flip.is-reduced .hs-flip__inner {
+  transition-duration: 0.12s;
+}
+
+.hs-flip__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 5% / 3.5%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.hs-flip__back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid rgba(125, 211, 160, 0.45);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(125, 211, 160, 0.25), transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(64, 145, 108, 0.35), transparent 45%),
+    repeating-linear-gradient(
+      -18deg,
+      #0d2818 0 8px,
+      #12281c 8px 16px
+    );
+  color: #e8f0eb;
+  cursor: pointer;
+  box-shadow:
+    0 0 3px -1px rgba(0, 0, 0, 0.4),
+    0 8px 24px -4px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 6px rgba(7, 20, 15, 0.55);
+  padding: 16px;
+}
+
+.hs-flip__back:disabled {
+  cursor: default;
+}
+
+.hs-flip__back:not(:disabled):hover {
+  border-color: #7dd3a0;
+  filter: brightness(1.06);
+}
+
+.hs-flip__back-logo {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.hs-flip__back-title {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #95d5b2;
+}
+
+.hs-flip__back-hint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.hs-flip__front {
+  transform: rotateY(180deg);
+  pointer-events: none;
+}
+
+.hs-flip.is-flipped .hs-flip__front {
+  pointer-events: auto;
+}
+
+.hs-flip__front-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hs-flip__front-card .hs-card {
+  width: 100%;
+  height: 100%;
+}
+
+/* —— Mosaic scramble overlay —— */
+.hs-mosaic {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  border-radius: 5% / 3.5%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hs-mosaic__tile {
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.25);
+}
+
+.hs-mosaic__tile.is-gone {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-flip__inner {
+    transition-duration: 0.01ms !important;
+  }
+
+  .hs-mosaic__tile {
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Legacy stagger (unused on Home; keep harmless) */
+  .hs-card-wrap--deal {
+    opacity: 1;
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}
