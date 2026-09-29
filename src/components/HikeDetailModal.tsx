@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import { X } from '@phosphor-icons/react';
 import type { HikeCard } from '../types';
 
 interface Props {
@@ -57,7 +58,7 @@ export function HikeDetailModal({ card, onClose }: Props) {
             onClick={onClose}
             aria-label="Close"
           >
-            ✕
+            <X size={18} weight="bold" />
           </button>
         </header>
 
@@ -86,7 +87,7 @@ export function HikeDetailModal({ card, onClose }: Props) {
             target="_blank"
             rel="noreferrer"
           >
-            Open in Google Maps →
+            Open in Google Maps
           </a>
           <button type="button" className="hs-btn" onClick={onClose}>
             Close

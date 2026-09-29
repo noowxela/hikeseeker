@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { MagnifyingGlass } from '@phosphor-icons/react';
 import type { HikeCard, Rarity } from '../types';
 import { HikeCardView } from '../components/HikeCard';
 
@@ -38,9 +39,9 @@ export function Catalog({ catalog, ownedIds, onSelectCard }: Props) {
   return (
     <section className="hs-page">
       <h1>Catalog</h1>
-      <p className="hs-muted">
-        Browse all Selangor v1 spots. Signed-out users can preview; ownership comes from daily
-        draws.
+      <p className="hs-page-lead">
+        Browse all Selangor spots. Signed-out users can preview; ownership comes from
+        daily draws.
       </p>
       <div className="hs-filters">
         <input
@@ -62,18 +63,30 @@ export function Catalog({ catalog, ownedIds, onSelectCard }: Props) {
           ))}
         </select>
       </div>
-      <p className="hs-muted">{filtered.length} shown</p>
-      <div className="hs-card-grid">
-        {filtered.map((c) => (
-          <HikeCardView
-            key={c.id}
-            card={c}
-            compact
-            owned={owned.has(c.id)}
-            onSelect={() => onSelectCard(c)}
-          />
-        ))}
-      </div>
+      <p className="hs-count">{filtered.length} shown</p>
+      {filtered.length === 0 ? (
+        <div className="hs-empty">
+          <span className="hs-empty__icon" aria-hidden>
+            <MagnifyingGlass size={22} weight="duotone" />
+          </span>
+          <p className="hs-empty__title">No matching trails</p>
+          <p className="hs-empty__body">
+            Try a different search or clear the rarity filter.
+          </p>
+        </div>
+      ) : (
+        <div className="hs-card-grid">
+          {filtered.map((c) => (
+            <HikeCardView
+              key={c.id}
+              card={c}
+              compact
+              owned={owned.has(c.id)}
+              onSelect={() => onSelectCard(c)}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

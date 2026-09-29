@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import type { HikeCard } from '../types';
 import { HikeCardView } from './HikeCard';
 import { MosaicOverlay } from './MosaicOverlay';
+import { Boot } from '@phosphor-icons/react';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 export type CardPhase = 'back' | 'flipping' | 'mosaic' | 'revealed';
@@ -121,10 +122,10 @@ export function DrawRevealStage({
               className="hs-flip__face hs-flip__back"
               onClick={handleBackClick}
               disabled={phase !== 'back'}
-              aria-label={`Card back — tap to reveal ${progressLabel}`}
+              aria-label={`Card back - tap to reveal ${progressLabel}`}
             >
               <span className="hs-flip__back-logo" aria-hidden>
-                🥾
+                <Boot size={42} weight="duotone" />
               </span>
               <span className="hs-flip__back-title">HikeSeeker</span>
               <span className="hs-flip__back-hint">
@@ -170,7 +171,7 @@ export function DrawRevealStage({
           <>
             <p className="hs-muted">
               {currentIndex < total - 1
-                ? 'Card revealed — continue when ready.'
+                ? 'Card revealed - continue when ready.'
                 : 'All three revealed.'}
             </p>
             <button

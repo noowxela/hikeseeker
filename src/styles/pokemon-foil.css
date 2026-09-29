@@ -52,7 +52,7 @@
 
 .hs-card:focus-visible {
   box-shadow:
-    0 0 0 3px #7dd3a0,
+    0 0 0 3px #c9922a,
     0 8px 24px -4px rgba(0, 0, 0, 0.45);
 }
 

@@ -12,6 +12,21 @@ import './App.css';
 
 const catalog = catalogJson as HikeCard[];
 
+function LoadingShell() {
+  return (
+    <div className="hs-loading" role="status" aria-live="polite" aria-label="Loading">
+      <span className="hs-skeleton hs-skeleton--lg" />
+      <span className="hs-skeleton hs-skeleton--md" />
+      <span className="hs-skeleton hs-skeleton--sm" />
+      <div className="hs-skeleton-cards" aria-hidden>
+        <span className="hs-skeleton-card" />
+        <span className="hs-skeleton-card" />
+        <span className="hs-skeleton-card" />
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [signingIn, setSigningIn] = useState(false);
@@ -22,6 +37,7 @@ export default function App() {
     useUserData(user, catalog);
 
   const ownedIds = useMemo(() => data?.ownedCardIds ?? [], [data]);
+  const bootLoading = loading || dataLoading;
 
   async function handleSignIn() {
     setAuthError(null);
@@ -37,6 +53,10 @@ export default function App() {
 
   return (
     <div className="hs-app">
+      <a className="hs-skip" href="#main">
+        Skip to content
+      </a>
+      <div className="hs-grain" aria-hidden />
       <Nav
         page={page}
         onNavigate={setPage}
@@ -46,11 +66,11 @@ export default function App() {
         onSignOut={() => void signOut()}
         signingIn={signingIn}
       />
-      <main className="hs-main">
-        {(loading || dataLoading) && <p className="hs-muted">Loading…</p>}
+      <main id="main" className="hs-main">
+        {bootLoading && <LoadingShell />}
         {authError && <p className="hs-error">{authError}</p>}
         {error && <p className="hs-error">{error}</p>}
-        {page === 'home' && (
+        {!bootLoading && page === 'home' && (
           <Home
             catalog={catalog}
             user={user}
@@ -61,7 +81,7 @@ export default function App() {
             onSelectCard={setSelectedCard}
           />
         )}
-        {page === 'collection' && (
+        {!bootLoading && page === 'collection' && (
           <Collection
             catalog={catalog}
             user={user}
@@ -71,7 +91,7 @@ export default function App() {
             onSelectCard={setSelectedCard}
           />
         )}
-        {page === 'catalog' && (
+        {!bootLoading && page === 'catalog' && (
           <Catalog
             catalog={catalog}
             ownedIds={ownedIds}
@@ -81,7 +101,7 @@ export default function App() {
       </main>
       <footer className="hs-footer">
         <span>
-          Card foil/tilt techniques adapted from{' '}
+          Card foil adapted from{' '}
           <a
             href="https://github.com/simeydotme/pokemon-cards-css"
             target="_blank"
@@ -90,7 +110,7 @@ export default function App() {
             simeydotme/pokemon-cards-css
           </a>
         </span>
-        <span>· HikeSeeker · Selangor v1</span>
+        <span>HikeSeeker · Selangor trails</span>
       </footer>
       <HikeDetailModal
         card={selectedCard}

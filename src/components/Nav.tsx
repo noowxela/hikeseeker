@@ -1,4 +1,5 @@
 import type { User } from 'firebase/auth';
+import { Boot } from '@phosphor-icons/react';
 
 export type Page = 'home' | 'collection' | 'catalog';
 
@@ -24,11 +25,11 @@ export function Nav({
   return (
     <header className="hs-nav">
       <div className="hs-nav__brand">
-        <span className="hs-nav__logo" aria-hidden>
-          🥾
+        <span className="hs-nav__mark" aria-hidden>
+          <Boot size={20} weight="duotone" />
         </span>
         <div>
-          <strong>HikeSeeker</strong>
+          <span className="hs-nav__title">HikeSeeker</span>
           <span className="hs-nav__tag">Selangor daily draws</span>
         </div>
       </div>
@@ -45,6 +46,7 @@ export function Nav({
             type="button"
             className={page === id ? 'is-active' : ''}
             onClick={() => onNavigate(id)}
+            aria-current={page === id ? 'page' : undefined}
           >
             {label}
           </button>

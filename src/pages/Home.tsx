@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { User } from 'firebase/auth';
+import { CardsThree } from '@phosphor-icons/react';
 import type { HikeCard, UserDoc } from '../types';
 import { HikeCardView } from '../components/HikeCard';
 import {
@@ -152,7 +153,7 @@ export function Home({
           </p>
           <button
             type="button"
-            className="hs-btn"
+            className="hs-btn hs-btn--primary"
             onClick={onSignIn}
             disabled={!firebaseConfigured}
           >
@@ -183,7 +184,7 @@ export function Home({
             </span>
           )}
           {!user && doneCards.length > 0 && (
-            <span className="hs-muted">Preview only — sign in to collect</span>
+            <span className="hs-muted">Preview only - sign in to collect</span>
           )}
           {(alreadyDrawn || mode.kind === 'done') && doneCards.length > 0 && (
             <button
@@ -227,9 +228,15 @@ export function Home({
         </div>
       ) : (
         !inRitual && (
-          <p className="hs-muted hs-empty">
-            No cards yet — hit the draw button to reveal today&apos;s trio.
-          </p>
+          <div className="hs-empty">
+            <span className="hs-empty__icon" aria-hidden>
+              <CardsThree size={22} weight="duotone" />
+            </span>
+            <p className="hs-empty__title">No cards yet</p>
+            <p className="hs-empty__body">
+              Hit the draw button to reveal today&apos;s trio of Selangor trails.
+            </p>
+          </div>
         )
       )}
     </section>
