@@ -17,11 +17,15 @@ interface Props {
   card: HikeCardData;
   compact?: boolean;
   owned?: boolean;
+  /** When true, parent can pair with deal-in CSS (Today's draw row only). */
+  deal?: boolean;
+  /** Index for staggered animation-delay (0-based). */
+  dealIndex?: number;
   /** Called on single click (not drag) or Enter. Opens detail panel. */
   onSelect?: () => void;
 }
 
-export function HikeCardView({ card, compact, owned, onSelect }: Props) {
+export function HikeCardView({ card, compact, owned, deal, dealIndex = 0, onSelect }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const pointerOrigin = useRef<{ x: number; y: number } | null>(null);
 
@@ -81,7 +85,8 @@ export function HikeCardView({ card, compact, owned, onSelect }: Props) {
   return (
     <div
       ref={ref}
-      className={`hs-card hs-card--${card.rarity}${compact ? ' hs-card--compact' : ''}`}
+      className={`hs-card hs-card--${card.rarity}${compact ? ' hs-card--compact' : ''}${deal ? ' hs-card--deal' : ''}`}
+      data-deal-index={deal ? dealIndex : undefined}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

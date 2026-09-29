@@ -339,3 +339,31 @@
     height: 220px;
   }
 }
+
+/* —— Staggered deal-in (Today's draw row only) —— */
+@keyframes hs-deal-in {
+  from {
+    opacity: 0;
+    transform: translateY(52px) rotate(-7deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+.hs-card-wrap--deal {
+  opacity: 0;
+  animation: hs-deal-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-card-wrap--deal {
+    opacity: 1;
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}

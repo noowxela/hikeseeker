@@ -5,6 +5,9 @@ import { HikeCardView } from '../components/HikeCard';
 import { klToday } from '../lib/klDate';
 import { drawForDate } from '../lib/draw';
 
+/** Stagger between each dealt card (ms). */
+const DEAL_STAGGER_MS = 320;
+
 interface Props {
   catalog: HikeCard[];
   user: User | null;
@@ -28,6 +31,8 @@ export function Home({
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [previewIds, setPreviewIds] = useState<string[] | null>(null);
+  /** Bumps on each draw/preview so the deal animation re-runs even if ids match. */
+  const [dealSeq, setDealSeq] = useState(0);
 
   const savedIds =
     userData?.lastDrawDate === today ? userData.lastDrawIds : null;
@@ -43,17 +48,22 @@ export function Home({
 
   const owned = new Set(userData?.ownedCardIds ?? []);
 
+  /** Remount key: draw ids + seq so guest re-preview and new draws replay the deal. */
+  const drawKey = displayIds ? `${displayIds.join(',')}:${dealSeq}` : '';
+
   async function handleDraw() {
     setErr(null);
     if (!user) {
       // Guest preview: show deterministic draw but do not save
       const guest = drawForDate(catalog, today, 3).map((c) => c.id);
+      setDealSeq((n) => n + 1);
       setPreviewIds(guest);
       return;
     }
     setBusy(true);
     try {
       const ids = await onDraw();
+      setDealSeq((n) => n + 1);
       setPreviewIds(ids);
     } catch (e: unknown) {
       setErr(e instanceof Error ? e.message : 'Draw failed');
@@ -117,12 +127,18 @@ export function Home({
       {err && <p className="hs-error">{err}</p>}
 
       {cards.length > 0 ? (
-        <div className="hs-card-row">
-          {cards.map((c) => (
-            <div key={c.id} className="hs-card-wrap">
+        <div className="hs-card-row" key={drawKey}>
+          {cards.map((c, index) => (
+            <div
+              key={c.id}
+              className="hs-card-wrap hs-card-wrap--deal"
+              style={{ animationDelay: `${index * DEAL_STAGGER_MS}ms` }}
+            >
               <HikeCardView
                 card={c}
                 owned={owned.has(c.id)}
+                deal
+                dealIndex={index}
                 onSelect={() => onSelectCard(c)}
               />
             </div>
