@@ -12,6 +12,7 @@ interface Props {
   onSignIn: () => void;
   onDraw: () => Promise<string[]>;
   firebaseConfigured: boolean;
+  onSelectCard: (card: HikeCard) => void;
 }
 
 export function Home({
@@ -21,6 +22,7 @@ export function Home({
   onSignIn,
   onDraw,
   firebaseConfigured,
+  onSelectCard,
 }: Props) {
   const today = klToday();
   const [busy, setBusy] = useState(false);
@@ -121,16 +123,8 @@ export function Home({
               <HikeCardView
                 card={c}
                 owned={owned.has(c.id)}
-                onOpenMaps={() => window.open(c.mapsUrl, '_blank', 'noopener')}
+                onSelect={() => onSelectCard(c)}
               />
-              <a
-                className="hs-maps-link"
-                href={c.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open in Google Maps →
-              </a>
             </div>
           ))}
         </div>

@@ -9,6 +9,7 @@ interface Props {
   userData: UserDoc | null;
   onSignIn: () => void;
   firebaseConfigured: boolean;
+  onSelectCard: (card: HikeCard) => void;
 }
 
 export function Collection({
@@ -17,6 +18,7 @@ export function Collection({
   userData,
   onSignIn,
   firebaseConfigured,
+  onSelectCard,
 }: Props) {
   const owned = useMemo(() => {
     const ids = new Set(userData?.ownedCardIds ?? []);
@@ -56,7 +58,7 @@ export function Collection({
               card={c}
               compact
               owned
-              onOpenMaps={() => window.open(c.mapsUrl, '_blank', 'noopener')}
+              onSelect={() => onSelectCard(c)}
             />
           ))}
         </div>

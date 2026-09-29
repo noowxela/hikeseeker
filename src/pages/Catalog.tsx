@@ -5,6 +5,7 @@ import { HikeCardView } from '../components/HikeCard';
 interface Props {
   catalog: HikeCard[];
   ownedIds: string[];
+  onSelectCard: (card: HikeCard) => void;
 }
 
 const RARITIES: Array<Rarity | 'all'> = [
@@ -16,7 +17,7 @@ const RARITIES: Array<Rarity | 'all'> = [
   'legendary',
 ];
 
-export function Catalog({ catalog, ownedIds }: Props) {
+export function Catalog({ catalog, ownedIds, onSelectCard }: Props) {
   const [q, setQ] = useState('');
   const [rarity, setRarity] = useState<Rarity | 'all'>('all');
   const owned = useMemo(() => new Set(ownedIds), [ownedIds]);
@@ -69,7 +70,7 @@ export function Catalog({ catalog, ownedIds }: Props) {
             card={c}
             compact
             owned={owned.has(c.id)}
-            onOpenMaps={() => window.open(c.mapsUrl, '_blank', 'noopener')}
+            onSelect={() => onSelectCard(c)}
           />
         ))}
       </div>

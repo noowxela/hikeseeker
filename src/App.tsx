@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import catalogJson from './data/selangor-hikes.json';
 import type { HikeCard } from './types';
 import { Nav, type Page } from './components/Nav';
+import { HikeDetailModal } from './components/HikeDetailModal';
 import { Home } from './pages/Home';
 import { Collection } from './pages/Collection';
 import { Catalog } from './pages/Catalog';
@@ -15,6 +16,7 @@ export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [signingIn, setSigningIn] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [selectedCard, setSelectedCard] = useState<HikeCard | null>(null);
   const { user, loading, signIn, signOut, firebaseConfigured } = useAuth();
   const { data, loading: dataLoading, error, ensureTodayDraw } =
     useUserData(user, catalog);
@@ -56,6 +58,7 @@ export default function App() {
             onSignIn={handleSignIn}
             onDraw={ensureTodayDraw}
             firebaseConfigured={firebaseConfigured}
+            onSelectCard={setSelectedCard}
           />
         )}
         {page === 'collection' && (
@@ -65,10 +68,15 @@ export default function App() {
             userData={data}
             onSignIn={handleSignIn}
             firebaseConfigured={firebaseConfigured}
+            onSelectCard={setSelectedCard}
           />
         )}
         {page === 'catalog' && (
-          <Catalog catalog={catalog} ownedIds={ownedIds} />
+          <Catalog
+            catalog={catalog}
+            ownedIds={ownedIds}
+            onSelectCard={setSelectedCard}
+          />
         )}
       </main>
       <footer className="hs-footer">
@@ -84,6 +92,10 @@ export default function App() {
         </span>
         <span>· HikeSeeker · Selangor v1</span>
       </footer>
+      <HikeDetailModal
+        card={selectedCard}
+        onClose={() => setSelectedCard(null)}
+      />
     </div>
   );
 }

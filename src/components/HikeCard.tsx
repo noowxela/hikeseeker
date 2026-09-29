@@ -1,5 +1,6 @@
 import { useCallback, useRef, type PointerEvent } from 'react';
 import type { HikeCard as HikeCardData } from '../types';
+import { resolveCardImageUrl } from '../lib/cardImage';
 import '../styles/pokemon-foil.css';
 
 const RARITY_EMOJI: Record<string, string> = {
@@ -10,15 +11,19 @@ const RARITY_EMOJI: Record<string, string> = {
   legendary: '🌋',
 };
 
+const CLICK_THRESHOLD_PX = 8;
+
 interface Props {
   card: HikeCardData;
   compact?: boolean;
   owned?: boolean;
-  onOpenMaps?: () => void;
+  /** Called on single click (not drag) or Enter. Opens detail panel. */
+  onSelect?: () => void;
 }
 
-export function HikeCardView({ card, compact, owned, onOpenMaps }: Props) {
+export function HikeCardView({ card, compact, owned, onSelect }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const pointerOrigin = useRef<{ x: number; y: number } | null>(null);
 
   const reset = useCallback(() => {
     const el = ref.current;
@@ -31,6 +36,10 @@ export function HikeCardView({ card, compact, owned, onOpenMaps }: Props) {
     el.style.setProperty('--pointer-y', '50%');
     el.style.setProperty('--background-x', '50%');
     el.style.setProperty('--background-y', '50%');
+  }, []);
+
+  const onPointerDown = useCallback((e: PointerEvent<HTMLDivElement>) => {
+    pointerOrigin.current = { x: e.clientX, y: e.clientY };
   }, []);
 
   const onPointerMove = useCallback((e: PointerEvent<HTMLDivElement>) => {
@@ -53,20 +62,43 @@ export function HikeCardView({ card, compact, owned, onOpenMaps }: Props) {
     el.style.setProperty('--card-opacity', '1');
   }, []);
 
+  const onPointerUp = useCallback(
+    (e: PointerEvent<HTMLDivElement>) => {
+      const origin = pointerOrigin.current;
+      pointerOrigin.current = null;
+      if (!origin || !onSelect) return;
+      const dx = e.clientX - origin.x;
+      const dy = e.clientY - origin.y;
+      if (Math.hypot(dx, dy) <= CLICK_THRESHOLD_PX) {
+        onSelect();
+      }
+    },
+    [onSelect],
+  );
+
+  const imageUrl = resolveCardImageUrl(card);
+
   return (
     <div
       ref={ref}
       className={`hs-card hs-card--${card.rarity}${compact ? ' hs-card--compact' : ''}`}
+      onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
-      onPointerLeave={reset}
-      onPointerCancel={reset}
-      role="article"
-      aria-label={`${card.name}, ${card.rarity}`}
+      onPointerUp={onPointerUp}
+      onPointerLeave={() => {
+        pointerOrigin.current = null;
+        reset();
+      }}
+      onPointerCancel={() => {
+        pointerOrigin.current = null;
+        reset();
+      }}
+      role="button"
+      aria-label={`${card.name}, ${card.rarity}. Open details`}
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' && onOpenMaps) onOpenMaps();
+        if (e.key === 'Enter' && onSelect) onSelect();
       }}
-      onDoubleClick={onOpenMaps}
       style={compact ? { width: 180 } : undefined}
     >
       <div className="hs-card__face">
@@ -75,8 +107,8 @@ export function HikeCardView({ card, compact, owned, onOpenMaps }: Props) {
           {owned ? ' · owned' : ''}
         </span>
         <div className="hs-card__art">
-          {card.imageUrl ? (
-            <img src={card.imageUrl} alt="" loading="lazy" />
+          {imageUrl ? (
+            <img src={imageUrl} alt="" loading="lazy" />
           ) : (
             <span aria-hidden>{RARITY_EMOJI[card.rarity] ?? '🥾'}</span>
           )}

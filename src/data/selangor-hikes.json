@@ -7,7 +7,8 @@
     "distanceKm": 2.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Broga+Hill+Semenyih",
     "rarity": "common",
-    "blurb": "Sunrise favourite with grassy ridges and Semenyih skyline views. Short but steep near the top."
+    "blurb": "Sunrise favourite with grassy ridges and Semenyih skyline views. Short but steep near the top.",
+    "imageUrl": "/hike-photos/broga-hill.jpg"
   },
   {
     "id": "bukit-gasing",
@@ -17,7 +18,8 @@
     "distanceKm": 4.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Gasing+Forest+Reserve",
     "rarity": "common",
-    "blurb": "Classic PJ jungle loop with rope climbs, stream crossings, and the famous suspension bridge."
+    "blurb": "Classic PJ jungle loop with rope climbs, stream crossings, and the famous suspension bridge.",
+    "imageUrl": "/hike-photos/bukit-gasing.jpg"
   },
   {
     "id": "bukit-tabur",
@@ -27,7 +29,8 @@
     "distanceKm": 3.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Tabur+West",
     "rarity": "rare",
-    "blurb": "Knife-edge quartz ridge above Klang Gates Dam. Permit required; exposure and scramble sections."
+    "blurb": "Knife-edge quartz ridge above Klang Gates Dam. Permit required; exposure and scramble sections.",
+    "imageUrl": "/hike-photos/bukit-tabur.jpg"
   },
   {
     "id": "templer-park",
@@ -37,7 +40,8 @@
     "distanceKm": 5.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Templer+Park+Rawang",
     "rarity": "common",
-    "blurb": "Waterfalls, picnic spots, and longer ridge options under shady canopy near Rawang."
+    "blurb": "Waterfalls, picnic spots, and longer ridge options under shady canopy near Rawang.",
+    "imageUrl": "/hike-photos/templer-park.jpg"
   },
   {
     "id": "frim-kepong",
@@ -47,7 +51,8 @@
     "distanceKm": 3.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=FRIM+Kepong+Canopy+Walk",
     "rarity": "common",
-    "blurb": "Research forest with canopy walk, Rover Track, and family-friendly trails. Entry fee applies."
+    "blurb": "Research forest with canopy walk, Rover Track, and family-friendly trails. Entry fee applies.",
+    "imageUrl": "/hike-photos/frim-kepong.jpg"
   },
   {
     "id": "bukit-kiara",
@@ -57,7 +62,8 @@
     "distanceKm": 6.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Kiara+Park",
     "rarity": "common",
-    "blurb": "Urban green lung with MTB trails, jogging loops, and quick after-work hill climbs."
+    "blurb": "Urban green lung with MTB trails, jogging loops, and quick after-work hill climbs.",
+    "imageUrl": "/hike-photos/bukit-kiara.jpg"
   },
   {
     "id": "kota-damansara-cf",
@@ -67,7 +73,8 @@
     "distanceKm": 4.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kota+Damansara+Community+Forest",
     "rarity": "uncommon",
-    "blurb": "Volunteer-restored secondary forest with marked loops and weekend community energy."
+    "blurb": "Volunteer-restored secondary forest with marked loops and weekend community energy.",
+    "imageUrl": "/hike-photos/kota-damansara-cf.jpg"
   },
   {
     "id": "ampang-recreational",
@@ -87,7 +94,8 @@
     "distanceKm": 16.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gunung+Nuang+Pangsun",
     "rarity": "legendary",
-    "blurb": "Selangor's high point (~1,493 m). Long day hike via Pangsun with river crossings and campsite options."
+    "blurb": "Selangor's high point (~1,493 m). Long day hike via Pangsun with river crossings and campsite options.",
+    "imageUrl": "/hike-photos/gunung-nuang.jpg"
   },
   {
     "id": "kanching-falls",
@@ -97,7 +105,8 @@
     "distanceKm": 2.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kanching+Rainforest+Waterfall",
     "rarity": "uncommon",
-    "blurb": "Multi-tier falls with steep steps. Popular weekends — go early for quieter pools."
+    "blurb": "Multi-tier falls with steep steps. Popular weekends — go early for quieter pools.",
+    "imageUrl": "/hike-photos/kanching-falls.jpg"
   },
   {
     "id": "bukit-lagong",
@@ -127,7 +136,8 @@
     "distanceKm": 5.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ayer+Hitam+Forest+Reserve+Puchong",
     "rarity": "uncommon",
-    "blurb": "Urban fringe research forest popular with runners and birders near Puchong."
+    "blurb": "Urban fringe research forest popular with runners and birders near Puchong.",
+    "imageUrl": "/hike-photos/ayer-hitam.jpg"
   },
   {
     "id": "sungai-congkak",
@@ -147,7 +157,8 @@
     "distanceKm": 3.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Saga+Hill+Cheras",
     "rarity": "uncommon",
-    "blurb": "Cheras ridge hike with rope sections and city glimpses. Watch for after-rain clay."
+    "blurb": "Cheras ridge hike with rope sections and city glimpses. Watch for after-rain clay.",
+    "imageUrl": "/hike-photos/saga-hill.jpg"
   },
   {
     "id": "bukit-cerakah",
@@ -157,7 +168,8 @@
     "distanceKm": 6.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Cerakah+Shah+Alam",
     "rarity": "common",
-    "blurb": "Eco park trails through secondary forest near the Shah Alam botanical gardens."
+    "blurb": "Eco park trails through secondary forest near the Shah Alam botanical gardens.",
+    "imageUrl": "/hike-photos/bukit-cerakah.jpg"
   },
   {
     "id": "bukit-dinding",
@@ -207,7 +219,8 @@
     "distanceKm": 3.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gombak+River+trail+Selangor",
     "rarity": "uncommon",
-    "blurb": "Riverside path into the foothills — cool microclimate and weekend picnic crowds."
+    "blurb": "Riverside path into the foothills — cool microclimate and weekend picnic crowds.",
+    "imageUrl": "/hike-photos/gombak-river.jpg"
   },
   {
     "id": "bukit-takun",
@@ -247,7 +260,8 @@
     "distanceKm": 3.0,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kuala+Selangor+Nature+Park",
     "rarity": "uncommon",
-    "blurb": "Mangrove boardwalks and birdwatching loops; combine with Bukit Melawati for a full day."
+    "blurb": "Mangrove boardwalks and birdwatching loops; combine with Bukit Melawati for a full day.",
+    "imageUrl": "/hike-photos/kuala-selangor-nature.jpg"
   },
   {
     "id": "bukit-melawati",
@@ -257,6 +271,7 @@
     "distanceKm": 1.5,
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bukit+Melawati+Kuala+Selangor",
     "rarity": "common",
-    "blurb": "Historic hill fort with silvered leaf monkeys and sunset over the Selangor estuary."
+    "blurb": "Historic hill fort with silvered leaf monkeys and sunset over the Selangor estuary.",
+    "imageUrl": "/hike-photos/bukit-melawati.jpg"
   }
 ]

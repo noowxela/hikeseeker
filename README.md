@@ -11,6 +11,8 @@ One draw of **3 unique** trail cards per **Asia/Kuala_Lumpur** calendar day. Reo
 - Catalog: browse ~25 Selangor spots (signed-out OK)
 - Sign in with Google to save draws to Firestore
 - Card foil & tilt UI adapted from [simeydotme/pokemon-cards-css](https://github.com/simeydotme/pokemon-cards-css) techniques (CSS transforms, gradients, blend-modes)
+- Tap a card for an in-app detail panel (Google Maps embed + trail info)
+- Optional Maps Static API thumbnails when `VITE_GOOGLE_MAPS_API_KEY` is set
 
 Deferred ideas live in [`docs/later.md`](docs/later.md).
 
@@ -75,11 +77,15 @@ service cloud.firestore {
 
 > This repo ships **placeholders only** (`.env.example`). No real API keys are committed.
 
+### Optional: Google Maps Static API (card thumbnails)
+
+Set `VITE_GOOGLE_MAPS_API_KEY` in `.env.local` (and Vercel env) to show hybrid map images on cards. Enable **Maps Static API** in Google Cloud, restrict the key by **HTTP referrer**, and leave blank to keep the rarity emoji fallback. The detail modal embed works without this key.
+
 ## Vercel deploy
 
 1. Import the GitHub repo in [Vercel](https://vercel.com).
 2. Framework preset: **Vite**. Build: `npm run build`, output: `dist`.
-3. Add the same `VITE_FIREBASE_*` env vars in Project → Settings → Environment Variables.
+3. Add the same `VITE_FIREBASE_*` env vars (and optional `VITE_GOOGLE_MAPS_API_KEY`) in Project → Settings → Environment Variables.
 4. Redeploy after env changes.
 5. Add the Vercel domain to Firebase Auth authorized domains.
 
