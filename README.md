@@ -99,7 +99,7 @@ Each entry: `id`, `name`, `district`, `difficulty`, `distanceKm`, `mapsUrl`, `ra
 
 ## Attribution
 
-- Holofoil / tilt presentation inspired by [simeydotme/pokemon-cards-css](https://github.com/simeydotme/pokemon-cards-css) (Simon Goellner). HikeSeeker vendors adapted CSS under `src/styles/pokemon-foil.css`, not a verbatim dump of that repo’s assets.
+- Holofoil / tilt presentation inspired by [simeydotme/pokemon-cards-css](https://github.com/simeydotme/pokemon-cards-css) (Simon Goellner). HikeSeeker vendors adapted CSS under `src/styles/pokemon-foil.css`, not a verbatim dump of that repo’s assets. Rarity map: common/uncommon → Common & Uncommon glare; rare → Amazing Rare; epic → VMax; legendary → Trainer Gallery Holofoil ([demo](https://poke-holo.simey.me)).
 - Trail blurbs are informal summaries for discovery — always check local permits, weather, and park rules before hiking.
 
 ## License

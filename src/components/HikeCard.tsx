@@ -13,6 +13,10 @@ const RARITY_EMOJI: Record<string, string> = {
 
 const CLICK_THRESHOLD_PX = 8;
 
+function clamp(n: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, n));
+}
+
 interface Props {
   card: HikeCardData;
   compact?: boolean;
@@ -38,6 +42,9 @@ export function HikeCardView({ card, compact, owned, deal, dealIndex = 0, onSele
     el.style.setProperty('--card-opacity', '0');
     el.style.setProperty('--pointer-x', '50%');
     el.style.setProperty('--pointer-y', '50%');
+    el.style.setProperty('--pointer-from-center', '0');
+    el.style.setProperty('--pointer-from-top', '0.5');
+    el.style.setProperty('--pointer-from-left', '0.5');
     el.style.setProperty('--background-x', '50%');
     el.style.setProperty('--background-y', '50%');
   }, []);
@@ -56,11 +63,20 @@ export function HikeCardView({ card, compact, owned, deal, dealIndex = 0, onSele
     const py = y / rect.height;
     const rotX = (0.5 - py) * 28;
     const rotY = (px - 0.5) * 28;
+    // Distance from card center in 0–1 (matches poke-holo --pointer-from-center)
+    const fromCenter = clamp(
+      Math.sqrt((py * 100 - 50) ** 2 + (px * 100 - 50) ** 2) / 50,
+      0,
+      1,
+    );
     el.classList.add('active');
     el.style.setProperty('--rotate-x', `${rotX}deg`);
     el.style.setProperty('--rotate-y', `${rotY}deg`);
     el.style.setProperty('--pointer-x', `${px * 100}%`);
     el.style.setProperty('--pointer-y', `${py * 100}%`);
+    el.style.setProperty('--pointer-from-center', `${fromCenter}`);
+    el.style.setProperty('--pointer-from-top', `${py}`);
+    el.style.setProperty('--pointer-from-left', `${px}`);
     el.style.setProperty('--background-x', `${px * 100}%`);
     el.style.setProperty('--background-y', `${py * 100}%`);
     el.style.setProperty('--card-opacity', '1');
@@ -129,6 +145,7 @@ export function HikeCardView({ card, compact, owned, deal, dealIndex = 0, onSele
         </div>
       </div>
       <div className="hs-card__foil" aria-hidden />
+      <div className="hs-card__glare" aria-hidden />
     </div>
   );
 }
